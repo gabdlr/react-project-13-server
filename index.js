@@ -20,6 +20,6 @@ app.use('/api/v1/auth', require('./routes/auth'));
 app.use('/api/v1/education', require('./routes/education'));
 app.use('/api/v1/profile', require('./routes/profile'));
 //Start server
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
     console.log('Server is running on port ' + PORT);
 });
