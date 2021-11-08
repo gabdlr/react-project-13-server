@@ -4,18 +4,22 @@ const UserSchema = mongoose.Schema(
     name: {
         type: "String",
         required: [true, "Name can not be empty"],
+        trim: true
     },
     lastname: {
         type: "String",
-        required: [true, "Lastname can not be empty"]
+        required: [true, "Lastname can not be empty"],
+        trim: true
     },
     picture:{
         type: "String",
-        default: '/assets/img/profile/default.png'
+        default: '/assets/img/profile/default.png',
+        trim: true
     },
     email: {
         type: "String",
         required: [true, "Email can not be empty"],
+        trim: true,
         unique: true
     },
     password: {
@@ -30,16 +34,18 @@ const UserSchema = mongoose.Schema(
     },
     about: {
         type: "String",
-        required: false
+        required: false,
+        trim: true
     },
     hobbies:{
         type: "String",
-        required: false
+        required: false,
+        trim: true
     },
     social:{
-        linkedin_url: { type: "string", required: false},
-        github_url: {type: "string", required: false},
-        twitter_url: {type: "string", required: false}
+        linkedin_url: { type: "string", required: false, trim: true},
+        github_url: {type: "string", required: false, trim: true},
+        twitter_url: {type: "string", required: false, trim: true}
     },
     register:{
         type: Date,

@@ -1,24 +1,28 @@
-const User = require('./../models/Users');
-const bcryptjs = require('bcryptjs');
-const utils = require('../utilities');
+const User = require('./../models/User');
 const { validationResult } = require('express-validator');
+const utils = require('../utilities');
+const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 exports.newUser = async (req, res) => {
     const validation = validationResult(req);
     if(!validation.isEmpty()){
         const errors = utils.errorValidationHandler(validation);
-        return res.status(400).json({errors: errors});
+        return res.status(400).json(errors);
     }
-
     try {
-        //Create new user
-        //Hash password
-        const { password } = req.body;
-        const salt = await bcryptjs.genSalt(10);
-        const passwordHashed = await bcryptjs.hash(password, salt);
-        req.body.password = passwordHashed;
+        //Extract email, password
+        let { email, password } = req.body;
+        //Check email is unique (long story)
+        const userEmail = await User.findOne({ email });
+        if(userEmail) {
+            return res.status(400).json({ errors: "This email has been already taken"});
+        }
+        //Create user
         const user = new User(req.body);
+        //Hash password
+        const salt = await bcryptjs.genSalt(10);
+        user.password = await bcryptjs.hash(password, salt);
         //Save user
         await user.save();
         //Save and sign JWT

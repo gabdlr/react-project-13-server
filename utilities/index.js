@@ -1,18 +1,27 @@
 //Res errors wrapper
 exports.errorResponseHandler = ( error ) => {
     const errors = [];
-    if(error.message.indexOf("11000") != -1)
-    {
-        errors.push('Email address is already taken')
+    if(error.errors[0].nestedErrors) {
+        for (const i in error.errors[0].nestedErrors){
+            errors.push(error.errors[0].nestedErrors[i].msg);
+        }
+        return errors;
     }
     for (const i in error.errors){
         errors.push(error.errors[i].message);
     }    
     return errors;
 }
+
 //Res validation errors wrapper
 exports.errorValidationHandler = ( error ) => {
-    const errors = [];    
+    const errors = [];
+    if(error.errors[0].nestedErrors) {
+        for (const i in error.errors[0].nestedErrors){
+            errors.push(error.errors[0].nestedErrors[i].msg);
+        }
+        return errors;
+    }
     for (const i in error.errors){
         errors.push(error.errors[i].msg);
     }
