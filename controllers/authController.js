@@ -28,18 +28,26 @@ exports.authenticateUser = async (req, res) => {
         }
         //Everything is ok, generate token
         //Save and sign JWT
-        const payload = {
-            user: {
-                id: user.id
-            }
-        };
+        const payload = { user: { id: user.id } };
+        let authtoken;
         jwt.sign(payload, process.env.SECRET_WORD, {
             expiresIn: 1200
         }, (error, token) => {
             if(error) throw error;
-            res.json({ token, msg: 'Successfuly authenticated' })
+            res.status(200).json(token);
         });
     } catch (error) {
-        res.status(500).json(error)   
+        res.status(500).json(error);   
+    }
+}
+
+//Gets authenticated user information
+exports.authenticatedUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id)
+        .select('-email -password -title -about -hobbies -social -register -__v');
+        res.status(200).json(user)
+    } catch (error) {
+        res.status(500).json(error);   
     }
 }

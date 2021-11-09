@@ -35,9 +35,8 @@ exports.newUser = async (req, res) => {
             expiresIn: 1200
         }, (error, token) => {
             if(error) throw error;
-            res.json({ token })
+            res.status(200).json(token);
         });
-        res.status(200).json({msg: 'Successfuly registered!'});
     } catch (error) {
         console.log(error);
         const errors = utils.errorResponseHandler(error);
