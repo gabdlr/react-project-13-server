@@ -21,15 +21,15 @@ exports.createEducation = async (req, res) => {
     }
 }
 
-//Get all education records
-exports.getEducation = async (req, res) => {
-    try{
-        const education = await Education.find({ creator_id: req.user.id });
-        res.json({education});
-    }catch{
-        res.status(500).json({msg: "An error has ocurred."})
-    }
-}
+// //Get all education records
+// exports.getEducation = async (req, res) => {
+//     try{
+//         const education = await Education.find({ creator_id: req.user.id });
+//         res.json({education});
+//     }catch{
+//         res.status(500).json({msg: "An error has ocurred."})
+//     }
+// }
 
 //Update a education record
 exports.updateEducation = async (req, res) => {
@@ -65,7 +65,7 @@ exports.updateEducation = async (req, res) => {
             {_id: req.params.id}, 
             { $set : educationNew}, 
             { new: true});
-        res.status(200).json({msg: "Updated successfuly"});
+        res.status(200).json({msg: "Updated successfuly", registry:education});
     } catch (error) {
         res.status(500).json({msg: "Internal server error."});
     }
@@ -89,7 +89,7 @@ exports.deleteEducation = async (req, res) => {
         
         //Remove entry from databse
         await Education.findOneAndDelete({_id: req.params.id});
-        res.status(200).json({msg: "Education entry removed successfuly"})
+        res.status(200).json({msg: "Education entry removed successfuly", _id: req.params.id})
         }catch(error){
             res.status(500).json({msg: "Internal server error"});
         }    

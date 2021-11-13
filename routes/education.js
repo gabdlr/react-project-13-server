@@ -14,7 +14,7 @@ router.post('/', auth,
         check('state', 'Current state must be informed').not().isEmpty()
     ],
     educationController.createEducation);
-router.get('/', auth, educationController.getEducation);
+// router.get('/', auth, educationController.getEducation);
 router.put('/:id', auth,     
     [
         check('institution', "Institution's name must be supplied").not().isEmpty(),

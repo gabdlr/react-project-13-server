@@ -8,7 +8,7 @@ exports.authenticateUser = async (req, res) => {
     const validation = validationResult(req);
     if(!validation.isEmpty()){
         const errors = utils.errorValidationHandler(validation);
-        return res.status(400).json({errors: errors});
+        return res.status(400).json({msg: errors});
     }
 
     //Extract data
@@ -17,14 +17,14 @@ exports.authenticateUser = async (req, res) => {
         //Search for email to be registered
         let user = await User.findOne({ email });
         if(!user){
-            const errors = ["There's an error in the information you've provided"]
-            return res.status(400).json({errors: errors});
+            const errors = ["There's an error in the information you've provided"];
+            return res.status(400).json({msg: errors});
         }
         //Check password
         const passwordCheck = await bcryptjs.compare(password, user.password);
         if(!passwordCheck){
-            const errors = ["There's an error in the information you've provided"]
-            return res.status(400).json({errors: errors});
+            const errors = ["There's an error in the information you've provided"];
+            return res.status(400).json({msg: errors});
         }
         //Everything is ok, generate token
         //Save and sign JWT

@@ -15,10 +15,13 @@ app.use(express.json({ extended: true }));
 const PORT = process.env.PORT || 4000;
 
 //Routes
-app.use('/api/v1/user', require('./routes/user'));
 app.use('/api/v1/auth', require('./routes/auth'));
-app.use('/api/v1/education', require('./routes/education'));
+app.use('/api/v1/user', require('./routes/user'));
 app.use('/api/v1/profile', require('./routes/profile'));
+app.use('/api/v1/education', require('./routes/education'));
+app.use('/api/v1/jobs', require('./routes/jobs'));
+app.use('/api/v1/courses', require('./routes/courses'));
+app.use('/api/v1/stack', require('./routes/stack'));
 //Start server
 app.listen(PORT, "0.0.0.0", () => {
     console.log('Server is running on port ' + PORT);
