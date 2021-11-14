@@ -37,7 +37,7 @@ exports.getProfile =  async (req, res) => {
         const tools = await Tool.find({ creator_id: req.params.id});
         profile.name = user.name;
         profile.lastname = user.lastname;
-        profile.picture = user.picture;
+        profile.picture =  `${process.env.SERVER}${user.picture}`;
         profile.email = user.email;
         profile.title = user.title;
         profile.about = user.about;

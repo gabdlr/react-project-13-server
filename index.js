@@ -22,6 +22,10 @@ app.use('/api/v1/education', require('./routes/education'));
 app.use('/api/v1/jobs', require('./routes/jobs'));
 app.use('/api/v1/courses', require('./routes/courses'));
 app.use('/api/v1/stack', require('./routes/stack'));
+app.use('/api/v1/personal', require('./routes/personal'));
+app.use('/api/v1/pictures', require('./routes/pictures'));
+app.use(express.static('public'));
+
 //Start server
 app.listen(PORT, "0.0.0.0", () => {
     console.log('Server is running on port ' + PORT);

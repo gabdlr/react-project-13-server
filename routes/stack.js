@@ -21,5 +21,5 @@ router.put('/:id', auth,
     ],
     stackController.updateStack);
 
-router.delete('/:id', auth, stackController.deleteStack )
+router.delete('/:id', auth, stackController.deleteStack );
 module.exports = router;
