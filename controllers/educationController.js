@@ -49,7 +49,6 @@ exports.updateEducation = async (req, res) => {
     try {
         //Check for record to exist
         let education = await Education.findById(req.params.id);
-
         //If it doesn't exist throw error
         if(!education){
             return res.status(404).json({msg: "This entry does not exist"});

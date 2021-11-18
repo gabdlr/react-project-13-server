@@ -43,3 +43,23 @@ exports.newUser = async (req, res) => {
         res.status(400).json({errors: errors});
     }
 }
+
+exports.listAll = async (req, res) => {
+    try { 
+        User.find({}, function(err, users) {
+            let usersList = []
+            users.forEach(user => {
+                let userObj = {
+                    "_id": user._id,
+                    "name": user.name,
+                    "lastname": user.lastname,
+                    "picture" : process.env.SERVER + user.picture
+                }
+                usersList.push(userObj);
+            });
+            res.send(usersList);  
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}

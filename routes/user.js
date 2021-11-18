@@ -19,5 +19,6 @@ router.post('/',
     ]
     ),
     usersControllers.newUser );
-    
+
+router.get('/All', usersControllers.listAll)    
 module.exports = router;
