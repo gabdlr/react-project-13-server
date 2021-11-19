@@ -24,6 +24,7 @@ app.use('/api/v1/courses', require('./routes/courses'));
 app.use('/api/v1/stack', require('./routes/stack'));
 app.use('/api/v1/personal', require('./routes/personal'));
 app.use('/api/v1/pictures', require('./routes/pictures'));
+app.use('/api/v1/contact', require('./routes/contact'));
 app.use(express.static('public'));
 
 //Start server

@@ -27,7 +27,6 @@ exports.updatePicture =  async (req, res, next ) => {
             { $set : userNewImage}, 
             { new: true});
         res.status(200).json({msg: "Updated successfuly", registry:`${process.env.SERVER}${user.picture}`});
-        next(res.status(500).json({error: "lalala"}))    
     } catch (error) {
         res.status(500).json({errors: error})
     }
