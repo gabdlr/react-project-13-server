@@ -11,6 +11,7 @@ exports.updatePicture =  async (req, res, next ) => {
         const newImageName = req.file.filename;
 
         //delete old image
+        //ultra uggly code improve this in the future near
         if(!oldImagePath.includes('default.png')){
             if (fs.existsSync(`../public/${oldImagePath}`)) {
                 fs.unlink(`public/${oldImagePath}`, (err) => {
@@ -19,10 +20,10 @@ exports.updatePicture =  async (req, res, next ) => {
                         return res.status(500).json({errors: ["Internal server error"]});
                     }
                 });
-                updatePicture(newImageName);
-            } else {
-                updatePicture(newImageName);
             }
+            updatePicture(newImageName);
+        } else {
+            updatePicture(newImageName);
         }
 
         //Update
