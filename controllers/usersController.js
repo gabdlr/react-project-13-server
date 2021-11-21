@@ -53,7 +53,7 @@ exports.listAll = async (req, res) => {
                     "_id": user._id,
                     "name": user.name,
                     "lastname": user.lastname,
-                    "picture" : process.env.SERVER + user.picture
+                    "picture" : user.picture
                 }
                 usersList.push(userObj);
             });
