@@ -14,7 +14,7 @@ exports.updatePicture =  async (req, res, next ) => {
         const client = new UploadClient({publicKey:'67a2020bd8cead2d7e02'});
         
         client.uploadFile(`${process.env.SERVER}/assets/img/profile/${newImageName}`).then(file => 
-            console.log(file.uuid));
+            console.log(file.cdnUrl));
 
         // //delete old image
         // //ultra uggly code improve this in the future near
