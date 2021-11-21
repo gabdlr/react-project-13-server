@@ -57,7 +57,7 @@ exports.listAll = async (req, res) => {
                 }
                 usersList.push(userObj);
             });
-            res.send(usersList);  
+            res.send(usersList.reverse());  
         });
     } catch (error) {
         console.log(error);
