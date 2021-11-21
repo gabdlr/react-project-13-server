@@ -14,8 +14,9 @@ exports.updatePicture =  async (req, res, next ) => {
         const client = new UploadClient({publicKey:'67a2020bd8cead2d7e02'});
         
         client.uploadFile(`${process.env.SERVER}/assets/img/profile/${newImageName}`).then(file => 
-            console.log(file.cdnUrl));
+            updatePicture(file.cdnUrl+'-/resize/250x250/')).catch( err => res.status(500).json({errors: ['Internal Server Error']}));
 
+        // Deprecated because of ephemeral heroku's bullshit
         // //delete old image
         // //ultra uggly code improve this in the future near
         // if(!oldImagePath.includes('default.png')){
@@ -33,13 +34,13 @@ exports.updatePicture =  async (req, res, next ) => {
         // }
 
         //Update
-        async function updatePicture(newImageName) {
-            const userNewImage = {"picture": `/assets/img/profile/${newImageName}`};
+        async function updatePicture(pictureRoute) {
+            const userNewImage = {"picture": pictureRoute };
             user = await User.findByIdAndUpdate(
                 {_id: req.user.id}, 
                 { $set : userNewImage}, 
                 { new: true});
-            res.status(200).json({msg: "Updated successfuly", registry:`${process.env.SERVER}${user.picture}`});
+            res.status(200).json({msg: "Updated successfuly", registry: pictureRoute});
             next();    
         } 
     }
