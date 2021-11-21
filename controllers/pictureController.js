@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const fs = require('fs');
+const { UploadClient } = require('@uploadcare/upload-client');
 
 exports.updatePicture =  async (req, res, next ) => {
 
@@ -9,22 +10,27 @@ exports.updatePicture =  async (req, res, next ) => {
         let user = await User.findById(req.user.id);
         const oldImagePath = user.picture;
         const newImageName = req.file.filename;
+        
+        const client = new UploadClient({publicKey:'67a2020bd8cead2d7e02'});
+        
+        client.uploadFile(`${process.env.SERVER}/assets/img/profile/${newImageName}`).then(file => 
+            console.log(file.uuid));
 
-        //delete old image
-        //ultra uggly code improve this in the future near
-        if(!oldImagePath.includes('default.png')){
-            if (fs.existsSync(`../public/${oldImagePath}`)) {
-                fs.unlink(`public/${oldImagePath}`, (err) => {
-                    if (err) {
-                        console.log(err);    
-                        return res.status(500).json({errors: ["Internal server error"]});
-                    }
-                });
-            }
-            updatePicture(newImageName);
-        } else {
-            updatePicture(newImageName);
-        }
+        // //delete old image
+        // //ultra uggly code improve this in the future near
+        // if(!oldImagePath.includes('default.png')){
+        //     if (fs.existsSync(`../public/${oldImagePath}`)) {
+        //         fs.unlink(`public/${oldImagePath}`, (err) => {
+        //             if (err) {
+        //                 console.log(err);    
+        //                 return res.status(500).json({errors: ["Internal server error"]});
+        //             }
+        //         });
+        //     }
+        //     updatePicture(newImageName);
+        // } else {
+        //     updatePicture(newImageName);
+        // }
 
         //Update
         async function updatePicture(newImageName) {

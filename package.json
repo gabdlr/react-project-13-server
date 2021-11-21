@@ -29,6 +29,7 @@
     "nodemon": "^2.0.14"
   },
   "dependencies": {
+    "@uploadcare/upload-client": "^2.0.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
