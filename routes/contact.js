@@ -7,7 +7,7 @@ router.post('/',
     [
         check('name', 'Name can not be empty').not().isEmpty(),
         check('email', 'Email can not be empty').not().isEmpty(),
-        check('email', 'Email must be a valid email address').not().isEmail(),
+        check('email', 'Email must be a valid email address').isEmail(),
         check('message', 'Message can not be empty').not().isEmpty()
     ], 
 contactController.contactSend);

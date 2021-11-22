@@ -35,6 +35,7 @@ exports.getProfile =  async (req, res) => {
         const courses = await Course.find({ creator_id: req.params.id});
         const stack = await Stack.find({ creator_id: req.params.id});
         const tools = await Tool.find({ creator_id: req.params.id});
+
         profile.name = user.name;
         profile.lastname = user.lastname;
         profile.picture =  user.picture;
@@ -49,6 +50,7 @@ exports.getProfile =  async (req, res) => {
         profile.stack = stack;
         profile.tools = tools;
         res.json(profile);
+
     }catch{
         res.status(500).json({msg: "An error has ocurred."})
     }
