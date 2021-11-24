@@ -11,8 +11,7 @@ router.post('/',
         check('name', 'Name can not be empty').not().isEmpty(),
         check('lastname', 'Lastname can not be empty').not().isEmpty(),
         check('email', 'Email can not be empty').not().isEmpty(),
-        check('password', 'Password can not be empty').not().isEmpty(),
-        check('password', 'Password must be at least 6 characters long').isLength({options: { min:6 }})
+        check('password', 'Password must be at least 6 characters long').not().isEmpty().isLength({options: { min:6 }})
     ],
     [
         check('email', 'Email must be a valid email address').isEmail(),
