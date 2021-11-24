@@ -6,17 +6,12 @@ const usersControllers = require('../controllers/usersController')
 //Creates new user
 // api/v1/user
 router.post('/',
-    oneOf(
     [   
         check('name', 'Name can not be empty').not().isEmpty(),
-        check('lastname', 'Lastname can not be empty').not().isEmpty(),
+        check('lastname', 'Lastname can not be empty').not().isEmpty().isEmail(),
         check('email', 'Email can not be empty').not().isEmpty(),
-        check('password', 'Password must be at least 6 characters long').isLength({min:6})
+        check('password', 'Password must be at least 6 characters long').notEmpty().isLength({ min: 6 })
     ],
-    [
-        check('email', 'Email must be a valid email address').isEmail(),
-    ]
-    ),
     usersControllers.newUser );
 
 router.get('/All', usersControllers.listAll)    
