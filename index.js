@@ -5,8 +5,8 @@ const cors = require('cors');
 const app = express();
 
 //Acces domain list for CORS
-let whitelist = ['https://gabrieldelosrios.dev', 'https://gabreact-project-resumeapp.netlify.app/']
-let corsOptions = {
+var whitelist = ['https://gabrieldelosrios.dev', 'https://gabreact-project-resumeapp.netlify.app/']
+var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
@@ -15,7 +15,6 @@ let corsOptions = {
     }
   }
 }
-
 //Connect to database
 connDB();
 app.use(cors(corsOptions));
