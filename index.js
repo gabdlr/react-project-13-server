@@ -4,9 +4,21 @@ const cors = require('cors');
 //Create server
 const app = express();
 
+//Acces domain list for CORS
+let whitelist = ['https://gabrieldelosrios.dev', 'https://gabreact-project-resumeapp.netlify.app/']
+let corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
 //Connect to database
 connDB();
-app.use(cors())
+app.use(cors(corsOptions));
 //Enable express.json
 //Allows us to read json with header tag application/json without the body parse function
 app.use(express.json({ extended: true }));
