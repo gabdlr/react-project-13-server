@@ -5,22 +5,23 @@ const cors = require('cors');
 const app = express();
 
 //Acces domain list for CORS
-var whitelist = ['https://www.gabrieldelosrios.dev', 
-'https://www.gabreact-project-resumeapp.netlify.app/', 
-'https://www.gabresumeapp.herokuapp.com/', 
-'https://www.ucarecdn.com/']
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
+// var whitelist = ['https://www.gabrieldelosrios.dev', 
+// 'https://www.gabreact-project-resumeapp.netlify.app/', 
+// 'https://www.gabresumeapp.herokuapp.com/', 
+// 'https://www.ucarecdn.com/']
+// var corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// }
 //Connect to database
 connDB();
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(cors());
 //Enable express.json
 //Allows us to read json with header tag application/json without the body parse function
 app.use(express.json({ extended: true }));
