@@ -5,7 +5,7 @@ const cors = require('cors');
 const app = express();
 
 //Acces domain list for CORS
-var whitelist = ['https://www.gabrieldelosrios.dev', 'https://www.gabreact-project-resumeapp.netlify.app/', 'https://ucarecdn.com/']
+var whitelist = ['https://www.gabrieldelosrios.dev', 'https://www.gabreact-project-resumeapp.netlify.app/', 'https://www.ucarecdn.com/']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
